@@ -1,21 +1,16 @@
 package main
 
 import (
+	"context"
 	"fmt"
-	"net/http"
+
+	"github.com/YonatanGott/go-micro/app"
 )
 
 func main() {
-	server := &http.Server{
-		Addr:    ":5000",
-		Handler: http.HandlerFunc(basicHandler),
-	}
-	err := server.ListenAndServe()
+	application := app.New()
+	err := application.Start(context.TODO())
 	if err != nil {
-		fmt.Println("failed to listen to server", err)
+		fmt.Println("failed to start server: %w", err)
 	}
-}
-
-func basicHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello World!"))
 }
