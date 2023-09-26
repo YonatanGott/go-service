@@ -74,7 +74,7 @@ func (r *RedisRepo) FindById(ctx context.Context, id uint64) (model.Order, error
 	return order, nil
 }
 
-func (r *RedisRepo) DeleteByID(ctx context.Context, id uint64) error {
+func (r *RedisRepo) DeleteById(ctx context.Context, id uint64) error {
 	key := orderIdKey(id)
 
 	txn := r.Client.TxPipeline()
